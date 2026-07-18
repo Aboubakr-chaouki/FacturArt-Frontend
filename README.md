@@ -41,8 +41,26 @@ Le frontend de FacturArt est une application web moderne et réactive construite
 - `src/lib/` : Utilitaires et configurations (axios, formatters).
 
 ## 🔑 Identifiants de test (Admin)
-- **Email** : `admin@facturart.com`
-- **Mot de passe** : `Admin123!`
+Les identifiants de l'administrateur par défaut sont configurés dans le fichier `.env` du backend. Par défaut (si non modifiés), vous pouvez les retrouver dans le fichier `.env.example` pour le développement local.
+
+- **Email** : `ADMIN_EMAIL` (voir .env)
+- **Mot de passe** : `ADMIN_PASSWORD` (voir .env)
+
+## 🚀 CI/CD & Docker
+
+Ce dépôt inclut des pipelines pour GitHub Actions :
+- **GitHub Actions** : `.github/workflows/frontend-ci.yml`
+
+Fonctionnalités :
+- **Lint & Build** : Automatique à chaque push/pull request.
+- **Docker** : Génération d'une image Docker `facturart-web` avec Nginx.
+- **Push** : Publication automatique sur GHCR lors d'un push sur `main`.
+
+### Dockerisation
+Pour construire l'image localement :
+```bash
+docker build -t facturart-web .
+```
 
 ---
 ## 🎨 Design System
