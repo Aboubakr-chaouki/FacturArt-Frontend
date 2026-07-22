@@ -32,13 +32,10 @@ export function InvoiceDetailModal({ invoice, isOpen, onClose, onUpdate }: Invoi
 
   // Recharger les données utilisateur fraîches quand la modale s'ouvre
   useEffect(() => {
-    let mounted = true;
     if (isOpen) {
-      refreshUserData().catch(err => {
+      refreshUserData().catch(() => {
       });
     }
-    return () => { mounted = false; };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]); // Retirer refreshUserData des dépendances pour éviter les boucles
 
   const company: CompanySettings = useMemo(() => ({
@@ -105,7 +102,7 @@ export function InvoiceDetailModal({ invoice, isOpen, onClose, onUpdate }: Invoi
         { orientation: 'portrait', format: 'a4' }
       );
       toast.success("Succès", "Facture téléchargée en PDF");
-    } catch (error) {
+    } catch {
       toast.error("Erreur", "Impossible de télécharger le PDF");
     } finally {
       setDownloading(false);
@@ -137,7 +134,7 @@ export function InvoiceDetailModal({ invoice, isOpen, onClose, onUpdate }: Invoi
       });
 
       toast.success("Succès", "Facture envoyée par email au client");
-    } catch (error) {
+    } catch {
       toast.error("Erreur", "Impossible d'envoyer l'email");
     } finally {
       setLoading(false);
@@ -150,7 +147,7 @@ export function InvoiceDetailModal({ invoice, isOpen, onClose, onUpdate }: Invoi
       await api.patch(`/invoices/${invoice.id}/status`, { status: newStatus });
       toast.success("Succès", `Statut mis à jour : ${newStatus}`);
       onUpdate?.();
-    } catch (error) {
+    } catch {
       toast.error("Erreur", "Impossible de mettre à jour le statut");
     } finally {
       setLoading(false);
@@ -163,7 +160,7 @@ export function InvoiceDetailModal({ invoice, isOpen, onClose, onUpdate }: Invoi
       await api.patch(`/invoices/${invoice.id}/status`, { status: 'PAYEE' });
       toast.success("Succès", "Facture marquée comme payée");
       onUpdate?.();
-    } catch (error) {
+    } catch {
       toast.error("Erreur", "Impossible d'enregistrer le paiement");
     } finally {
       setLoading(false);
