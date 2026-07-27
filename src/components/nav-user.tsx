@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { BadgeCheck, ChevronsUpDown, LogOut } from "lucide-react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -57,10 +56,6 @@ function NavUser() {
         return url;
     })();
 
-    useEffect(() => {
-        if (logoUrl) {
-        }
-    }, [logoUrl]);
 
     const displayName = user.nomCommercial || "Mon Entreprise";
     const initials = (user.nomCommercial?.[0] || "U").toUpperCase();
