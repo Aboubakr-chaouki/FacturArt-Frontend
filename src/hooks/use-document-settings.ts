@@ -11,7 +11,7 @@ export function useDocumentSettings() {
     if (saved) {
       try {
         return JSON.parse(saved);
-      } catch (e) {
+      } catch {
         return {};
       }
     }
@@ -24,7 +24,6 @@ export function useDocumentSettings() {
     return cached ? JSON.parse(cached) : null;
   });
 
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   // Fonction pour recharger les données utilisateur fraîches du serveur
   const refreshUserData = useCallback(async (force = false) => {
@@ -60,10 +59,9 @@ export function useDocumentSettings() {
           localStorage.setItem("invoiceSettings", updatedLocalStr);
           setLocalSettings(updatedLocal);
         }
-        
-        setRefreshTrigger(prev => prev + 1);
       }
-    } catch (error) {
+    } catch {
+      // Erreur silencieuse lors du rafraîchissement des données
     }
   }, []);
 
@@ -76,8 +74,8 @@ export function useDocumentSettings() {
         try {
           const newUser = JSON.parse(e.newValue);
           setUser(newUser);
-          setRefreshTrigger(prev => prev + 1);
-        } catch (e) {
+        } catch {
+          // Ignorer l'erreur de parsing
         }
       }
     };
@@ -140,14 +138,15 @@ export function useDocumentSettings() {
     );
 
     return { ...merged, ...activeLocalSettings };
-  }, [user, localSettings, refreshTrigger]);
+  }, [user, localSettings]);
 
   const saveSettings = useCallback((newSettings: Partial<DocumentSettings>) => {
     setLocalSettings((prev) => {
       const merged = { ...(prev || {}), ...(newSettings || {}) } as Partial<DocumentSettings>;
       try {
         localStorage.setItem("invoiceSettings", JSON.stringify(merged));
-      } catch (e) {
+      } catch {
+        // Ignorer l'erreur d'écriture dans le localStorage
       }
       return merged;
     });
