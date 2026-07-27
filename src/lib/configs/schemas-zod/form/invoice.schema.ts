@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { documentLineSchema } from "./quote.schema";
+import { documentLineSchema } from "./common.schema";
 
 export const createInvoiceSchema = z.object({
   clientId: z.number().min(1, "Veuillez sélectionner un client"),

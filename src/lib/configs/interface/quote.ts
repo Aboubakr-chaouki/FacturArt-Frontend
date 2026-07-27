@@ -1,3 +1,5 @@
+import { BaseDocument, BaseCreateDocumentRequest } from './document';
+
 export type QuoteStatus = 'BROUILLON' | 'ENVOYE' | 'ACCEPTE' | 'CONVERTI' | 'REFUSE';
 
 export interface DocumentLine {
@@ -18,31 +20,10 @@ export interface DocumentLineRequest {
   unit?: string;
 }
 
-export interface Quote {
-  id: number;
-  client: {
-    id: number;
-    firstName: string;
-    lastName: string;
-    email: string;
-    address?: string;
-    phone?: string;
-    companyName?: string;
-    type: string;
-    addressLine1?: string;
-    postalCode?: string;
-    city?: string;
-  };
+export interface Quote extends BaseDocument {
   quoteNumber: string;
   status: QuoteStatus;
-  issueDate: string;
   validityDate: string;
-  totalHt: number;
-  totalTva: number;
-  totalTtc: number;
-  notes?: string;
-  lines: DocumentLine[];
-  createdAt: string;
   invoiceNumber?: string;
   invoiceCreatedAt?: string;
   validationToken?: string;
@@ -93,11 +74,8 @@ export interface PublicQuoteResponse {
   invoiceId?: number;
 }
 
-export interface CreateQuoteRequest {
-  clientId: number;
-  issueDate: string;
+export interface CreateQuoteRequest extends BaseCreateDocumentRequest {
   validityDate: string;
   status?: QuoteStatus;
   notes?: string;
-  lines: DocumentLineRequest[];
 }

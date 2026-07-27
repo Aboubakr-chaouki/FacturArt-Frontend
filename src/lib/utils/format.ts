@@ -23,13 +23,3 @@ export const formatCurrency = (amount: number | string | null | undefined): stri
   }
 };
 
-export const formatDateTime = (dateStr: string | Date | null | undefined): string => {
-    try {
-      if (!dateStr) return "N/A";
-      const date = typeof dateStr === 'string' ? new Date(dateStr) : dateStr;
-      if (isNaN(date.getTime())) return "Date invalide";
-      return format(date, 'dd/MM/yyyy HH:mm', { locale: fr });
-    } catch {
-      return "Erreur date";
-    }
-  };
