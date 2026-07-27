@@ -1,6 +1,6 @@
 import api from '../api.config';
-import { LoginFormValues } from '../../lib/configs/schemas-zod/form/login-form-schema';
-import { Step1Values, Step2Values } from '../../lib/configs/schemas-zod/form/register-form-schema';
+import { LoginFormValues } from '@/lib/configs/schemas-zod/form';
+import { Step1Values, Step2Values } from '@/lib/configs/schemas-zod/form';
 
 export const authApi = {
   register: async (data: Step1Values & Step2Values) => {
