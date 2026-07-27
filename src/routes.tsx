@@ -5,7 +5,7 @@ import { AdminRoute } from "@/components/admin-route"
 import { RouteObject, Navigate } from "react-router-dom"
 
 // Layouts
-const DashboardShellLayout = lazy(() => import("@/layouts/dashboard-shell-layout"))
+const DashboardLayout = lazy(() => import("@/layouts/dashboard-layout"))
 
 // Pages publiques
 const HomePage     = lazy(() => import("@/app/home-page/home-page"))
@@ -14,7 +14,7 @@ const RegisterPage = lazy(() => import("@/app/register-page/register-page"))
 const NotFoundPage = lazy(() => import("@/app/not-found-page/not-found-page"))
 
 // Pages dashboard
-const DashboardPage     = lazy(() => import("@/app/dashboard/dashboard-page"))
+const DashboardPage     = lazy(() => import("@/app/dashboard/dashboard-page/dashboard-page"))
 const ClientsPage       = lazy(() => import("@/app/dashboard/clients-page/clients-page"))
 const FacturesPage      = lazy(() => import("@/app/dashboard/factures-page/factures-page"))
 const DevisPage         = lazy(() => import("@/app/dashboard/devis-page/devis-page"))
@@ -22,14 +22,14 @@ const ProfilePage       = lazy(() => import("@/app/dashboard/profile-page/profil
 const InvoiceCustomizationPage = lazy(() => import("@/app/dashboard/settings-page/invoice-customization-page"))
 const SupportDashboardPage = lazy(() => import("@/app/dashboard/support-page/support-dashboard-page"))
 const SupportPage       = lazy(() => import("@/app/support-page/support-page"))
-const PublicQuoteView  = lazy(() => import("@/app/public/quotes/PublicQuoteView"))
-const PrivacyPolicyPage = lazy(() => import("@/app/public/legal/privacy-policy-page"))
-const LegalNoticePage   = lazy(() => import("@/app/public/legal/legal-notice-page"))
+const PublicQuoteView  = lazy(() => import("@/app/public/quotes/public-quote-view/public-quote-view"))
+const PrivacyPolicyPage = lazy(() => import("@/app/public/legal/privacy-policy-page/privacy-policy-page"))
+const LegalNoticePage   = lazy(() => import("@/app/public/legal/legal-notice-page/legal-notice-page"))
 
 // Admin
-const AdminDashboardPage = lazy(() => import("@/app/admin/dashboard-page"))
-const AdminUsersPage = lazy(() => import("@/app/admin/users-page"))
-const AdminSupportPage = lazy(() => import("@/app/admin/support-messages-page"))
+const AdminDashboardPage = lazy(() => import("@/app/admin/dashboard-page/dashboard-page"))
+const AdminUsersPage = lazy(() => import("@/app/admin/users-page/users-page"))
+const AdminSupportPage = lazy(() => import("@/app/admin/support-messages-page/support-messages-page"))
 
 const fallback = <div />
 
@@ -76,7 +76,7 @@ const routes: RouteObject[] = [
         children: [
             {
                 path: "/",
-                element: <Suspense fallback={fallback}><DashboardShellLayout /></Suspense>,
+                element: <Suspense fallback={fallback}><DashboardLayout /></Suspense>,
                 children: [
                     { path: "dashboard",        element: <Suspense fallback={fallback}><DashboardPage /></Suspense>     },
                     { path: "clients",          element: <Suspense fallback={fallback}><ClientsPage /></Suspense>       },
@@ -98,7 +98,7 @@ const routes: RouteObject[] = [
         element: <AdminRoute />,
         children: [
             {
-                element: <Suspense fallback={fallback}><DashboardShellLayout /></Suspense>,
+                element: <Suspense fallback={fallback}><DashboardLayout /></Suspense>,
                 children: [
                     { path: "", element: <Suspense fallback={fallback}><AdminDashboardPage /></Suspense> },
                     { path: "utilisateurs", element: <Suspense fallback={fallback}><AdminUsersPage /></Suspense> },
