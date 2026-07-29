@@ -23,7 +23,7 @@ export default function LegalNoticePage() {
                                 <br />
                                 RCS Paris B 123 456 789
                                 <br />
-                                Email : contact@facturart.com
+                                Email : contact@facturart.fr
                             </p>
                         </section>
 
