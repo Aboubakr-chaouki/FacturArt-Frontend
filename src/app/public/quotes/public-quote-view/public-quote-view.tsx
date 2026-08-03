@@ -197,12 +197,11 @@ export default function PublicQuoteView() {
               <Button 
                 onClick={handleValidate} 
                 disabled={!canValidate}
-                className="shadow-lg font-bold transition-all active:scale-95 px-6"
-                style={{ 
-                  backgroundColor: canValidate ? documentSettings.secondaryColor : '#cbd5e1',
-                  color: canValidate ? documentSettings.primaryColor : '#64748b',
-                  borderColor: canValidate ? documentSettings.secondaryColor : '#cbd5e1'
-                }}
+                className={`shadow-lg font-bold transition-all active:scale-95 px-6 ${
+                  canValidate 
+                    ? "bg-green-600 hover:bg-green-700 text-white border-green-600" 
+                    : "bg-slate-300 text-slate-500 border-slate-300"
+                }`}
               >
                 {isValidating ? (
                   <>
@@ -235,11 +234,11 @@ export default function PublicQuoteView() {
            <Button 
              onClick={handleValidate} 
              disabled={!canValidate}
-             className="w-full h-12 text-lg font-bold shadow-2xl"
-             style={{ 
-               backgroundColor: canValidate ? documentSettings.secondaryColor : '#cbd5e1',
-               color: canValidate ? documentSettings.primaryColor : '#64748b'
-             }}
+             className={`w-full h-12 text-lg font-bold shadow-2xl ${
+               canValidate 
+                 ? "bg-green-600 hover:bg-green-700 text-white" 
+                 : "bg-slate-300 text-slate-500"
+             }`}
            >
              {isValidating ? (
                <>
