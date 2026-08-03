@@ -20,7 +20,7 @@ export const ProArtisanTemplate: React.FC<TemplateProps> = ({ data, settings }) 
         </div>
 
         <div className="text-right">
-          <div className="inline-block px-3 py-1.5 bg-slate-900 text-white rounded-sm">
+          <div className="inline-block px-3 py-1.5 text-white rounded-sm" style={{ backgroundColor: settings.primaryColor || '#0f172a' }}>
             <div className="text-[9px] uppercase tracking-widest font-black leading-none mb-1">{data.type === 'INVOICE' ? 'FACTURE' : 'DEVIS'}</div>
             <div className="text-xs font-bold leading-none">N° {data.number}</div>
           </div>
@@ -87,7 +87,7 @@ export const ProArtisanTemplate: React.FC<TemplateProps> = ({ data, settings }) 
             <span>TVA</span>
             <span>{formatCurrency(data.totalTva)}</span>
           </div>
-          <div className="flex justify-between items-center p-4 bg-slate-900 text-white rounded-sm mt-2 shadow-xl">
+          <div className="flex justify-between items-center p-4 text-white rounded-sm mt-2 shadow-xl" style={{ backgroundColor: settings.primaryColor || '#0f172a' }}>
             <span className="text-[10px] font-black uppercase tracking-widest">Total TTC</span>
             <span className="text-xl font-black">{formatCurrency(data.totalTtc)}</span>
           </div>

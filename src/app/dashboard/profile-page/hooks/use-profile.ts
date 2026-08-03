@@ -5,6 +5,7 @@ import { profileFormSchema, type ProfileFormValues } from "@/lib/configs/schemas
 import { User } from "@/lib/configs/interface/user"
 import { usersApi } from "@/api/users/users.api"
 import { BASE_URL } from "@/api/api.config"
+import { getLogoUrl } from "@/lib/utils/getLogoUrl"
 import { AxiosError } from "axios"
 import { useAppToast } from "@/hooks/common/use-app-toast"
 import { useNavigate } from "react-router-dom"
@@ -111,15 +112,13 @@ export function useProfile(): UseProfileReturn {
                 rcs: user.rcs || "",
                 capital: user.capital || "",
                 exonerationTva: !!user.exonerationTva,
-                documentTemplate: user.documentTemplate || "CLASSIC",
-                primaryColor: user.primaryColor || "#0D3D2E",
-                secondaryColor: user.secondaryColor || "#2ECC8E",
             }
 
             reset(formData)
 
-            if (user.logo && typeof user.logo === 'string') {
-                setLogoPreview(user.logo.startsWith('http') ? user.logo : `${BASE_URL}${user.logo}`)
+            if (user.logo) {
+                const url = getLogoUrl(user.logo, BASE_URL);
+                if (url) setLogoPreview(url);
             }
         }
 
@@ -140,8 +139,9 @@ export function useProfile(): UseProfileReturn {
             const updatedUser = await usersApi.updateProfile(data, logoFile)
             localStorage.setItem('user', JSON.stringify(updatedUser))
             
-            if (updatedUser.logo && typeof updatedUser.logo === 'string') {
-                setLogoPreview(updatedUser.logo.startsWith('http') ? updatedUser.logo : `${BASE_URL}${updatedUser.logo}`)
+            if (updatedUser.logo) {
+                const url = getLogoUrl(updatedUser.logo, BASE_URL);
+                if (url) setLogoPreview(url);
             }
             
             // Rafraîchir les données utilisateur dans les documents settings pour mettre à jour le logo dans les factures/devis

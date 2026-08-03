@@ -11,6 +11,7 @@ import {
 import {
     SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar,
 } from "@/components/ui/sidebar"
+import {getLogoUrl} from "@/lib/utils/getLogoUrl.ts";
 
 const getUserFromStorage = () => {
     const userStr = localStorage.getItem('user');
@@ -38,24 +39,7 @@ function NavUser() {
         logo: undefined,
     };
 
-    const logoUrl = (() => {
-        const logo = user.logo;
-        if (!logo) return undefined;
-        if (logo instanceof File) return URL.createObjectURL(logo);
-        let url = logo;
-        if (typeof logo === 'string') {
-            if (logo.startsWith('http')) {
-                url = logo;
-            } else if (logo.startsWith('/uploads')) {
-                url = `${BASE_URL}${logo}`;
-            }
-        }
-        if (url && typeof url === 'string' && url.includes('localhost:8080')) {
-            url = url.replace('localhost:8080', '127.0.0.1:8080');
-        }
-        return url;
-    })();
-
+    const logoUrl = getLogoUrl(user.logo, BASE_URL);
 
     const displayName = user.nomCommercial || "Mon Entreprise";
     const initials = (user.nomCommercial?.[0] || "U").toUpperCase();

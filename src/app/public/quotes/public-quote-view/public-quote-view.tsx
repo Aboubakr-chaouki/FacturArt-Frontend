@@ -45,23 +45,15 @@ export default function PublicQuoteView() {
   }, [quote]);
 
   const handleValidate = useCallback(async () => {
-    console.log("[DEBUG] handleValidate called");
-    console.log("[DEBUG] { token, isValidating, quote }", { token, isValidating, quote: !!quote });
-    
     if (isValidating || !token || !quote) {
-      console.log("[DEBUG] Early return - validation already in progress or missing data");
       return;
     }
     
-    console.log("[DEBUG] Quote status:", quote.status);
-
-    console.log("[DEBUG] Sending validation request to:", `/public/quotes/${token}/validate`);
     setIsValidating(true);
     const toastId = toast.loading("Validation en cours...");
     
     try {
       const response = await api.post(`/public/quotes/${token}/validate`, {});
-      console.log("[DEBUG] Validation successful:", response.data);
       setValidatedInvoice(response.data);
       setIsSuccess(true);
       toast.success("Devis validé", {
@@ -70,7 +62,6 @@ export default function PublicQuoteView() {
       });
     } catch (err: unknown) {
       const axiosError = err as AxiosError<{ message: string }>;
-      console.error("[DEBUG] Validation failed:", axiosError);
       const errorMessage = axiosError.response?.data?.message || "Une erreur est survenue lors de la validation.";
       toast.error("Erreur de validation", {
         id: toastId,

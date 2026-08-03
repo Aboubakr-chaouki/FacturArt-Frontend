@@ -5,7 +5,7 @@ import { LegalFooter } from './LegalFooter';
 
 export const ArtisanTemplate: React.FC<TemplateProps> = ({ data, settings }) => {
   return (
-    <div className="flex flex-col min-h-full p-10 bg-white text-slate-800 font-sans border-[4px] border-slate-900 max-w-[210mm] mx-auto shadow-sm">
+    <div className="flex flex-col min-h-full p-10 bg-white text-slate-800 font-sans border-[4px] max-w-[210mm] mx-auto shadow-sm" style={{ borderColor: settings.primaryColor || '#0f172a' }}>
       {/* Header */}
       <div className="flex justify-between items-start mb-10">
         <div className="space-y-4">
@@ -20,8 +20,8 @@ export const ArtisanTemplate: React.FC<TemplateProps> = ({ data, settings }) => 
           </div>
         </div>
         <div className="text-right space-y-2">
-          <div className="inline-block px-4 py-2 border-2 border-slate-900">
-            <h2 className="text-lg font-black uppercase italic text-slate-900">
+          <div className="inline-block px-4 py-2 border-2" style={{ borderColor: settings.primaryColor || '#0f172a' }}>
+            <h2 className="text-lg font-black uppercase italic" style={{ color: settings.primaryColor || '#0f172a' }}>
               {data.type === 'INVOICE' ? 'Facture' : 'Devis'}
             </h2>
           </div>
@@ -47,7 +47,7 @@ export const ArtisanTemplate: React.FC<TemplateProps> = ({ data, settings }) => 
             </div>
           )}
         </div>
-        <div className="p-4 bg-slate-50 border-l-2 border-slate-900">
+        <div className="p-4 bg-slate-50 border-l-2" style={{ borderLeftColor: settings.primaryColor || '#0f172a' }}>
           <h3 className="text-[8px] font-black uppercase mb-2 tracking-widest text-slate-400">Destinataire</h3>
           <p className="font-bold text-xs mb-1 text-slate-900">{data.client.company || data.client.name}</p>
           {data.client.company && data.client.name && <p className="text-[10px] mb-1 font-medium italic">{data.client.name}</p>}
@@ -65,7 +65,7 @@ export const ArtisanTemplate: React.FC<TemplateProps> = ({ data, settings }) => 
       <div className="flex-1 mb-10">
         <table className="w-full border-collapse">
           <thead>
-            <tr className="bg-slate-900 text-white uppercase text-[8px] tracking-[0.25em]">
+            <tr className="text-white uppercase text-[8px] tracking-[0.25em]" style={{ backgroundColor: settings.primaryColor || '#0f172a' }}>
               <th className="px-5 py-3 text-left">Désignation</th>
               <th className="px-5 py-3 text-center w-16">Qté</th>
               <th className="px-5 py-3 text-right w-24">P.U. HT</th>
@@ -106,7 +106,7 @@ export const ArtisanTemplate: React.FC<TemplateProps> = ({ data, settings }) => 
             <span>TVA</span>
             <span>{formatCurrency(data.totalTva)}</span>
           </div>
-          <div className="flex justify-between px-4 py-3 bg-slate-900 text-white rounded-sm mt-2 shadow-lg">
+          <div className="flex justify-between px-4 py-3 text-white rounded-sm mt-2 shadow-lg" style={{ backgroundColor: settings.primaryColor || '#0f172a' }}>
             <span className="font-black uppercase tracking-widest text-[10px] self-center">Net à payer</span>
             <span className="text-xl font-black">{formatCurrency(data.totalTtc)}</span>
           </div>

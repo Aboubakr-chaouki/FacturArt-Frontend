@@ -7,7 +7,7 @@ export const ProfessionalTemplate: React.FC<TemplateProps> = ({ data, settings }
   return (
     <div className="flex flex-col min-h-full bg-white text-slate-800 font-sans max-w-[210mm] mx-auto">
       {/* Black Header Section */}
-      <div className="bg-slate-900 text-white p-10 flex justify-between items-center">
+      <div className="text-white p-10 flex justify-between items-center" style={{ backgroundColor: settings.primaryColor || '#0f172a' }}>
         <div className="flex gap-6 items-center">
           {settings.logoUrl && (
             <div className="bg-white p-3 rounded-sm">
@@ -96,7 +96,7 @@ export const ProfessionalTemplate: React.FC<TemplateProps> = ({ data, settings }
             {data.notes && (
               <div className="space-y-2">
                 <h4 className="text-[9px] font-bold uppercase text-slate-400 tracking-widest">Notes & Conditions</h4>
-                <div className="text-[10px] text-slate-500 bg-slate-50/50 p-4 rounded-sm border border-slate-100 border-l-2 border-l-slate-900">
+                <div className="text-[10px] text-slate-500 bg-slate-50/50 p-4 rounded-sm border border-slate-100 border-l-2" style={{ borderLeftColor: settings.primaryColor || '#0f172a' }}>
                   {data.notes}
                 </div>
               </div>
@@ -114,7 +114,7 @@ export const ProfessionalTemplate: React.FC<TemplateProps> = ({ data, settings }
                   <span className="font-bold">{formatCurrency(data.totalTva)}</span>
                 </div>
               </div>
-              <div className="bg-slate-900 text-white p-4 flex justify-between items-center">
+              <div className="text-white p-4 flex justify-between items-center" style={{ backgroundColor: settings.primaryColor || '#0f172a' }}>
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-70">Net à payer</span>
                 <span className="text-xl font-black">{formatCurrency(data.totalTtc)}</span>
               </div>

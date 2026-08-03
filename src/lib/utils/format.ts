@@ -1,6 +1,11 @@
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 
+/**
+ * Formate une date au format français (dd/MM/yyyy).
+ * @param dateStr La date à formater (chaîne, objet Date, null ou undefined).
+ * @returns La date formatée ou "N/A"/"Date invalide" en cas d'erreur.
+ */
 export const formatDate = (dateStr: string | Date | null | undefined): string => {
   try {
     if (!dateStr) return "N/A";

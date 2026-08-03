@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { clientsApi } from "@/api/clients/clients.api";
 import { Client } from "@/lib/configs/interface/client.ts";
 import { useAppToast } from "@/hooks/common/use-app-toast";
@@ -17,7 +17,7 @@ export function useClients() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [selectedClient, setSelectedClient] = useState<Client | null>(null);
 
-  const fetchClients = async () => {
+  const fetchClients = useCallback(async () => {
     setIsLoading(true);
     try {
       const data = await clientsApi.getAll();
@@ -27,11 +27,11 @@ export function useClients() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [toast]);
 
   useEffect(() => {
     fetchClients();
-  }, []);
+  }, [fetchClients]);
 
   const filteredClients = useMemo(() => {
     let result = clients;
@@ -50,7 +50,7 @@ export function useClients() {
     return result;
   }, [clients, searchTerm, filterType]);
 
-  const handleDelete = async () => {
+  const handleDelete = useCallback(async () => {
     if (!selectedClient) return;
     try {
       setIsDeleting(true);
@@ -64,7 +64,7 @@ export function useClients() {
     } finally {
       setIsDeleting(false);
     }
-  };
+  }, [selectedClient, toast, fetchClients]);
 
   return {
     clients,

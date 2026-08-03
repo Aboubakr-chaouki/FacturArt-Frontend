@@ -24,7 +24,7 @@ const AdminUsersPage = () => {
       })
       .catch(() => {})
       .finally(() => setLoading(false));
-  }, []);
+  }, [fetchUsers]);
 
   if (loading) return <div className="p-8">Chargement des artisans...</div>;
 

@@ -36,7 +36,7 @@ export function InvoiceDetailModal({ invoice, isOpen, onClose, onUpdate }: Invoi
       refreshUserData().catch(() => {
       });
     }
-  }, [isOpen]); // Retirer refreshUserData des dépendances pour éviter les boucles
+  }, [isOpen, refreshUserData]); 
 
   const company: CompanySettings = useMemo(() => ({
     companyName: settings.companyName || "VOTRE ENTREPRISE",

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Controller } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { Eye, EyeOff, ArrowRight, AlertCircle } from "lucide-react";
 import { Button }    from "@/components/ui/button";
 import { Input }     from "@/components/ui/input";
@@ -47,9 +48,9 @@ export function LoginForm() {
             <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
                     <Label htmlFor="password" className="text-sm font-medium text-gray-700">Mot de passe</Label>
-                    <a href="/forgot-password" className="text-xs font-medium hover:underline" style={{ color: G.dark }}>
+                    <Link to="/forgot-password" className="text-xs font-medium hover:underline" style={{ color: G.dark }}>
                         Mot de passe oublié ?
-                    </a>
+                    </Link>
                 </div>
                 <Controller name="password" control={control}
                             render={({ field }) => (
@@ -89,7 +90,7 @@ export function LoginForm() {
             </div>
 
             <Button variant="outline" className="w-full h-11 font-medium" asChild>
-                <a href={ROUTES.register}>Créer un compte gratuit</a>
+                <Link to={ROUTES.register}>Créer un compte gratuit</Link>
             </Button>
         </form>
     );

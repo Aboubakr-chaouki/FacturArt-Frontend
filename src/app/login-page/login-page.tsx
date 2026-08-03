@@ -1,7 +1,7 @@
 import { LoginForm } from "@/app/login-page/components/login-form";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 
 export default function LoginPage() {
     const [searchParams] = useSearchParams();
@@ -27,8 +27,8 @@ export default function LoginPage() {
                     </div>
                     <p className="text-center text-[11px] text-gray-400 mt-6 leading-relaxed">
                         En vous connectant, vous acceptez nos{" "}
-                        <a href="/legal" className="underline hover:text-gray-600">CGU</a> et notre{" "}
-                        <a href="/privacy" className="underline hover:text-gray-600">politique de confidentialité</a>.
+                        <Link to="/legal" className="underline hover:text-gray-600">CGU</Link> et notre{" "}
+                        <Link to="/privacy" className="underline hover:text-gray-600">politique de confidentialité</Link>.
                     </p>
                 </div>
             </main>

@@ -19,11 +19,6 @@ export const profileFormSchema = z.object({
     capital:        z.string().max(50).optional().or(z.literal("")),
     exonerationTva: z.boolean(),
     logo:           z.any().optional(),
-    
-    // Personnalisation
-    documentTemplate: z.string().min(1, "Modèle requis"),
-    primaryColor:     z.string().regex(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/, "Format couleur invalide"),
-    secondaryColor:   z.string().regex(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/, "Format couleur invalide"),
 })
 
 export type ProfileFormValues = z.infer<typeof profileFormSchema>

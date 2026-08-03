@@ -1,19 +1,19 @@
 export const NAV_LINKS = [
-    { label: "Modules",         href: "#modules"         },
-    { label: "Fonctionnalités", href: "#fonctionnalites" },
-    { label: "FAQ",             href: "#faq"             },
+    { label: "Modules",         href: "/home#modules"         },
+    { label: "Fonctionnalités", href: "/home#fonctionnalites" },
+    { label: "FAQ",             href: "/home#faq"             },
 ] as const;
 
 export const FOOTER_COLS = [
     {
         title: "Modules",
         links: [
-            { label: "Authentification", href: "#modules"         },
-            { label: "Clients",          href: "#modules"         },
-            { label: "Devis & Factures", href: "#modules"         },
-            { label: "Communication",    href: "#modules"         },
-            { label: "Tableau de bord",  href: "#modules"         },
-            { label: "Archivage PDF",    href: "#modules"         },
+            { label: "Authentification", href: "/home#modules"         },
+            { label: "Clients",          href: "/home#modules"         },
+            { label: "Devis & Factures", href: "/home#modules"         },
+            { label: "Communication",    href: "/home#modules"         },
+            { label: "Tableau de bord",  href: "/home#modules"         },
+            { label: "Archivage PDF",    href: "/home#modules"         },
         ],
     },
     {

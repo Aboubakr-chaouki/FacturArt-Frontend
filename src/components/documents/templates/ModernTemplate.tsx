@@ -7,7 +7,7 @@ export const ModernTemplate: React.FC<TemplateProps> = ({ data, settings }) => {
   return (
     <div className="flex flex-col min-h-full bg-white text-slate-900 font-sans max-w-[210mm] mx-auto">
       {/* Top Bar Accent */}
-      <div className="h-1.5 w-full bg-slate-900"></div>
+      <div className="h-1.5 w-full" style={{ backgroundColor: settings.primaryColor || '#0f172a' }}></div>
       
       <div className="flex-1 p-10 bg-slate-50/30">
         {/* Header */}
@@ -91,7 +91,7 @@ export const ModernTemplate: React.FC<TemplateProps> = ({ data, settings }) => {
             )}
           </div>
           
-          <div className="col-span-5 space-y-3 bg-slate-900 p-6 rounded-sm text-white shadow-xl">
+          <div className="col-span-5 space-y-3 p-6 rounded-sm text-white shadow-xl" style={{ backgroundColor: settings.primaryColor || '#0f172a' }}>
             <div className="flex justify-between text-[10px] uppercase tracking-wider opacity-60">
               <span>Total HT</span>
               <span className="font-bold">{formatCurrency(data.totalHt)}</span>

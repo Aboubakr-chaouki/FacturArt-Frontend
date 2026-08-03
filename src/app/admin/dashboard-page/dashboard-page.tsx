@@ -24,7 +24,7 @@ const AdminDashboardPage = () => {
       .then(setStats)
       .catch(() => {})
       .finally(() => setLoading(false));
-  }, []);
+  }, [fetchStats]);
 
   if (loading) return (
     <div className="p-8 flex items-center justify-center min-h-[400px]">

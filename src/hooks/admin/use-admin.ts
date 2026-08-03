@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
 
@@ -36,64 +36,70 @@ export interface SupportMessage {
 
 export const useAdmin = () => {
   const [loading, setLoading] = useState(false);
-  const token = localStorage.getItem('token');
 
-  const fetchStats = async (): Promise<AdminStats> => {
+  const fetchStats = useCallback(async (): Promise<AdminStats> => {
+    const token = localStorage.getItem('token');
     const res = await fetch(`${API_BASE_URL}/admin/stats`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (!res.ok) throw new Error('Erreur lors de la récupération des stats');
     return res.json();
-  };
+  }, []);
 
-  const fetchUsers = async (): Promise<UserResponse[]> => {
+  const fetchUsers = useCallback(async (): Promise<UserResponse[]> => {
+    const token = localStorage.getItem('token');
     const res = await fetch(`${API_BASE_URL}/admin/users`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (!res.ok) throw new Error('Erreur lors de la récupération des utilisateurs');
     return res.json();
-  };
+  }, []);
 
-  const deleteUser = async (userId: number) => {
+  const deleteUser = useCallback(async (userId: number) => {
+    const token = localStorage.getItem('token');
     const res = await fetch(`${API_BASE_URL}/admin/users/${userId}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (!res.ok) throw new Error('Erreur lors de la suppression');
-  };
+  }, []);
 
-  const updateUserRole = async (userId: number, role: string) => {
+  const updateUserRole = useCallback(async (userId: number, role: string) => {
+    const token = localStorage.getItem('token');
     const res = await fetch(`${API_BASE_URL}/admin/users/${userId}/role?role=${role}`, {
       method: 'PATCH',
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (!res.ok) throw new Error('Erreur lors de la mise à jour du rôle');
     return res.json();
-  };
+  }, []);
 
-  const fetchMessages = async (): Promise<SupportMessage[]> => {
+  const fetchMessages = useCallback(async (): Promise<SupportMessage[]> => {
+    const token = localStorage.getItem('token');
     const res = await fetch(`${API_BASE_URL}/support/admin/messages`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (!res.ok) throw new Error('Erreur lors de la récupération des messages');
     return res.json();
-  };
+  }, []);
 
-  const markMessageAsRead = async (messageId: number) => {
+  const markMessageAsRead = useCallback(async (messageId: number) => {
+    const token = localStorage.getItem('token');
     const res = await fetch(`${API_BASE_URL}/support/admin/messages/${messageId}/read`, {
       method: 'PATCH',
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (!res.ok) throw new Error('Erreur lors du marquage comme lu');
-  };
+  }, []);
 
-  const deleteMessage = async (messageId: number) => {
+  const deleteMessage = useCallback(async (messageId: number) => {
+    const token = localStorage.getItem('token');
     const res = await fetch(`${API_BASE_URL}/support/admin/messages/${messageId}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (!res.ok) throw new Error('Erreur lors de la suppression du message');
-  };
+  }, []);
 
   return {
     fetchStats,

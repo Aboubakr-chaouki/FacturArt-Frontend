@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { ArrowRight, CheckCircle2, ChevronDown, Star } from "lucide-react"
+import { Link } from "react-router-dom"
 import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
 import {
@@ -25,10 +26,10 @@ function Hero() {
 
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap mb-11">
-                    <a href="/register"
+                    <Link to="/register"
                        className="inline-flex items-center justify-center gap-2 bg-[var(--c-dark)] text-white px-7 py-3.5 rounded-xl font-semibold text-[15px] no-underline whitespace-nowrap">
                         Commencer gratuitement <ArrowRight size={16} />
-                    </a>
+                    </Link>
                     <a href="#modules"
                        className="inline-flex items-center justify-center gap-2 text-[var(--c-dark)] border border-gray-200 px-7 py-3.5 rounded-xl font-semibold text-[15px] no-underline whitespace-nowrap">
                         Voir les modules
@@ -108,10 +109,10 @@ function Modules() {
                                     {tagline}
                                 </h3>
                                 <p className="text-[15px] text-gray-500 leading-relaxed">{desc}</p>
-                                <a href="/register"
+                                <Link to="/register"
                                    className="inline-flex items-center gap-1.5 mt-6 text-sm font-semibold text-[var(--c-dark)] no-underline">
                                     Essayer gratuitement <ArrowRight size={14} />
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     ))}
@@ -192,10 +193,10 @@ function HowItWorks() {
                 </div>
 
                 <div className="text-center mt-14">
-                    <a href="/register"
+                    <Link to="/register"
                        className="inline-flex items-center gap-2 bg-[var(--c-dark)] text-white px-7 py-3.5 rounded-xl font-semibold text-[15px] no-underline">
                         Commencer maintenant <ArrowRight size={16} />
-                    </a>
+                    </Link>
                 </div>
             </div>
         </section>
@@ -257,10 +258,10 @@ function Cta() {
                 <p className="text-[17px] text-white/40 leading-relaxed mb-11">
                     Rejoignez les artisans qui ont repris le contrôle de leur activité. Commencez gratuitement, sans carte bancaire.
                 </p>
-                <a href="/register"
+                <Link to="/register"
                    className="inline-flex items-center gap-2 bg-[var(--c-green)] text-white px-8 py-3.5 rounded-xl font-semibold text-base no-underline">
                     Créer mon compte gratuit <ArrowRight size={17} />
-                </a>
+                </Link>
                 <p className="text-xs text-white/20 mt-5">
                     Sans carte bancaire · Sans engagement · Hébergé en France 🇫🇷
                 </p>

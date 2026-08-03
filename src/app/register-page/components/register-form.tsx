@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Controller } from "react-hook-form"
+import { Link } from "react-router-dom"
 import { Eye, EyeOff, ArrowRight, ArrowLeft, AlertCircle, Check, Building2, User } from "lucide-react"
 import { Button }    from "@/components/ui/button"
 import { Input }     from "@/components/ui/input"
@@ -149,9 +150,9 @@ function Step1({ form1, onStep1Submit, isSubmitting1, serverError }: {
                                 )} />
                     <Label htmlFor="accepted" className="text-sm text-gray-500 font-normal leading-relaxed cursor-pointer">
                         J'accepte les{" "}
-                        <a href="/legal" className="underline font-medium" style={{ color: G.dark }}>conditions d'utilisation</a>
+                        <Link to="/legal" className="underline font-medium" style={{ color: G.dark }}>conditions d'utilisation</Link>
                         {" "}et la{" "}
-                        <a href="/privacy" className="underline font-medium" style={{ color: G.dark }}>politique de confidentialité</a>.
+                        <Link to="/privacy" className="underline font-medium" style={{ color: G.dark }}>politique de confidentialité</Link>.
                     </Label>
                 </div>
                 {errors.accepted && <p className="text-xs text-red-500">{String(errors.accepted.message)}</p>}
@@ -185,7 +186,7 @@ function Step1({ form1, onStep1Submit, isSubmitting1, serverError }: {
             </div>
 
             <Button variant="outline" className="w-full h-11 font-medium" asChild>
-                <a href={ROUTES.login}>Se connecter</a>
+                <Link to={ROUTES.login}>Se connecter</Link>
             </Button>
         </form>
     )

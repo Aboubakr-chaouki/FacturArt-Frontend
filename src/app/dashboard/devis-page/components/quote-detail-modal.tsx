@@ -32,7 +32,7 @@ interface QuoteDetailModalProps {
         refreshUserData().catch(() => {
         });
       }
-    }, [isOpen]); 
+    }, [isOpen, refreshUserData]); 
   
     const company: CompanySettings = useMemo(() => ({
     companyName: settings.companyName || "VOTRE ENTREPRISE",

@@ -62,7 +62,7 @@ export const ElegantTemplate: React.FC<TemplateProps> = ({ data, settings }) => 
       </div>
 
       <div className="flex flex-col items-end mb-16 px-6">
-        <div className="w-64 space-y-3 font-sans border-t-2 border-stone-900 pt-6">
+        <div className="w-64 space-y-3 font-sans pt-6 border-t-2" style={{ borderTopColor: settings.primaryColor || '#1c1917' }}>
           <div className="flex justify-between text-[9px] tracking-widest text-stone-400 uppercase">
             <span>Total HT</span>
             <span>{formatCurrency(data.totalHt)}</span>

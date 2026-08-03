@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/Logo.png";
 import { NAV_LINKS } from "@/lib/configs/data/nav.constants.ts";
@@ -19,12 +20,12 @@ export default function Header() {
         <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm" : "bg-transparent"}`}>
             <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
 
-                <a href="/" className="flex items-center gap-2.5">
+                <Link to="/" className="flex items-center gap-2.5">
                     <img src={logo} alt="FacturArt" className="w-8 h-auto" />
                     <span className="font-bold text-[15px] text-gray-900 tracking-tight">
                         Factur<span style={{ color: colors.green }}>Art</span>
                     </span>
-                </a>
+                </Link>
 
                 <nav className="hidden md:flex items-center gap-1">
                     {NAV_LINKS.map(({ label, href }) => (
@@ -37,10 +38,10 @@ export default function Header() {
 
                 <div className="hidden md:flex items-center gap-2">
                     <Button variant="ghost" size="sm" className="rounded-full" asChild>
-                        <a href="/login">Connexion</a>
+                        <Link to="/login">Connexion</Link>
                     </Button>
                     <Button size="sm" className="rounded-full gap-1.5 text-white" style={{ background: colors.dark }} asChild>
-                        <a href="/register">Commencer <ArrowRight className="w-3.5 h-3.5" /></a>
+                        <Link to="/register">Commencer <ArrowRight className="w-3.5 h-3.5" /></Link>
                     </Button>
                 </div>
 
@@ -59,10 +60,10 @@ export default function Header() {
                     ))}
                     <div className="flex gap-2 pt-3 border-t border-gray-100">
                         <Button variant="outline" size="sm" className="flex-1 rounded-full" asChild>
-                            <a href="/login">Connexion</a>
+                            <Link to="/login" onClick={() => setOpen(false)}>Connexion</Link>
                         </Button>
                         <Button size="sm" className="flex-1 rounded-full text-white" style={{ background: colors.dark }} asChild>
-                            <a href="/register">Commencer</a>
+                            <Link to="/register" onClick={() => setOpen(false)}>Commencer</Link>
                         </Button>
                     </div>
                 </div>

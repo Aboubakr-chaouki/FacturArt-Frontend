@@ -20,6 +20,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Building2, User, Phone, CreditCard, Upload, Loader2 } from "lucide-react"
 import { Label } from "@/components/ui/label"
 import { STATUS_JURIDIQUE } from "@/lib/configs/enums/status-juridique.enums"
+import { PasswordChangeForm } from "./components/password-change-form"
 
 
 export default function ProfilePage() {
@@ -413,6 +414,11 @@ export default function ProfilePage() {
                     </div>
                 </form>
             </Form>
+
+            {/* --- Section Sécurité --- */}
+            <div className="mt-12 pt-8 border-t">
+                <PasswordChangeForm />
+            </div>
 
             {/* --- Section Zone de Danger --- */}
             <div className="mt-12 pt-8 border-t">

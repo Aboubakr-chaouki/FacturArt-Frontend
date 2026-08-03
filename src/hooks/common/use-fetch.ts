@@ -38,13 +38,13 @@ export const useFetch = <T>(
     } finally {
       setIsLoading(false);
     }
-  }, [fetchFn, errorMessage]); // onSuccess et onError ne doivent pas être des dépendances si non stables
+  }, [fetchFn, errorMessage, onSuccess, onError]); 
 
   useEffect(() => {
     if (immediate) {
       execute();
     }
-  }, [execute]); // Suppression de immediate des dépendances car execute en dépend déjà indirectement ou est stable
+  }, [execute, immediate]); 
 
   return {
     data,

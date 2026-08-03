@@ -44,7 +44,7 @@ export const DocumentRenderer: React.FC<TemplateProps> = (props) => {
     };
     
     processLogo();
-  }, [settings.logoUrl]);
+  }, [settings.logoUrl, base64Logo]);
 
   const processedSettings = {
     ...settings,

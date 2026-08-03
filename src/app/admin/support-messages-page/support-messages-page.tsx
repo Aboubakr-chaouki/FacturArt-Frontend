@@ -39,7 +39,7 @@ const AdminSupportMessagesPage = () => {
       .then(setMessages)
       .catch(() => {})
       .finally(() => setLoading(false));
-  }, []);
+  }, [fetchMessages]);
 
   const handleMarkAsRead = async (id: number) => {
     try {

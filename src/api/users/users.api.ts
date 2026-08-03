@@ -1,5 +1,6 @@
 import { User } from "@/lib/configs/interface/user";
 import api from "@/api/api.config";
+import { PasswordChangeValues } from "@/lib/configs/schemas-zod/form/password-change-schema";
 
 export const usersApi = {
     getMe: async (): Promise<User> => {
@@ -31,5 +32,9 @@ export const usersApi = {
             responseType: "blob",
         });
         return response.data;
+    },
+    changePassword: async (passwordData: PasswordChangeValues): Promise<void> => {
+        const { oldPassword, newPassword } = passwordData;
+        await api.put("/users/change-password", { oldPassword, newPassword });
     },
 };

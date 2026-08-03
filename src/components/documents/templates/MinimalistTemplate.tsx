@@ -46,7 +46,7 @@ export const MinimalistTemplate: React.FC<TemplateProps> = ({ data, settings }) 
       <div className="flex-1 mb-16">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-slate-900 text-left text-[8px] font-black uppercase tracking-[0.25em] text-slate-400">
+            <tr className="text-left text-[8px] font-black uppercase tracking-[0.25em] text-slate-400 border-b" style={{ borderBottomColor: settings.primaryColor || '#0f172a' }}>
               <th className="pb-3">Désignation</th>
               <th className="pb-3 text-center w-20">Qté</th>
               <th className="pb-3 text-right w-32">P.U. HT</th>
