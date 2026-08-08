@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { quotesApi } from "@/api/quotes/quotes.api";
 import { Quote, PageResponse } from "@/lib/configs/interface";
 import { useAppToast } from "@/hooks/common/use-app-toast";

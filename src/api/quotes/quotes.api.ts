@@ -1,7 +1,6 @@
 import api from "../api.config";
 import { createCrudApi } from "../api.utils";
-import { CreateQuoteRequest, Quote } from "../../lib/configs/interface/quote";
-import { PageParams, PageResponse } from "../../lib/configs/interface/common";
+import { CreateQuoteRequest, Quote, PageParams, PageResponse } from "@/lib/configs/interface";
 
 export const quotesApi = {
   ...createCrudApi<Quote, CreateQuoteRequest, CreateQuoteRequest>("/quotes"),

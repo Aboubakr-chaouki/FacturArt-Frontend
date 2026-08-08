@@ -1,7 +1,6 @@
 import api from "../api.config";
 import { createCrudApi } from "../api.utils";
-import { CreateInvoiceRequest, Invoice } from "../../lib/configs/interface/invoice";
-import { PageParams, PageResponse } from "../../lib/configs/interface/common";
+import { CreateInvoiceRequest, Invoice, PageParams, PageResponse } from "@/lib/configs/interface";
 
 export const invoicesApi = {
   ...createCrudApi<Invoice, CreateInvoiceRequest, CreateInvoiceRequest>("/invoices"),
