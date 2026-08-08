@@ -1,11 +1,14 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { quotesApi } from "@/api/quotes/quotes.api";
-import { Quote } from "@/lib/configs/interface";
+import { Quote, PageResponse } from "@/lib/configs/interface";
 import { useAppToast } from "@/hooks/common/use-app-toast";
 import { useFetch } from "@/hooks/common/use-fetch";
 
 export function useQuotes() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [status, setStatus] = useState<string | undefined>(undefined);
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedQuote, setSelectedQuote] = useState<Quote | null>(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
@@ -14,16 +17,28 @@ export function useQuotes() {
   const [isDeleting, setIsDeleting] = useState(false);
   const toast = useAppToast();
 
-  const fetchFn = useMemo(() => () => quotesApi.getAll(), []);
+  const fetchFn = useCallback(() => quotesApi.getAllPaginated({
+    page,
+    size: pageSize,
+    search: searchTerm,
+    status: status
+  }), [page, pageSize, searchTerm, status]);
 
   const { 
-    data: quotes = [], 
+    data: pageData, 
     isLoading, 
     execute: fetchQuotes,
-    setData: setQuotes
-  } = useFetch<Quote[]>(fetchFn, {
+  } = useFetch<PageResponse<Quote>>(fetchFn, {
     errorMessage: "Impossible de charger les devis."
   });
+
+  const quotes = pageData?.content || [];
+  const totalElements = pageData?.totalElements || 0;
+  const totalPages = pageData?.totalPages || 0;
+
+  useEffect(() => {
+    fetchQuotes();
+  }, [fetchQuotes]);
 
   const handleQuoteUpdate = useCallback(() => {
     fetchQuotes();
@@ -39,7 +54,7 @@ export function useQuotes() {
     try {
       setIsDeleting(true);
       await quotesApi.delete(quoteToDelete.id);
-      if (setQuotes) setQuotes(quotes.filter(q => q.id !== quoteToDelete.id));
+      fetchQuotes();
       toast.success("Succès", "Le devis a été supprimé");
       setIsDeleteModalOpen(false);
       setQuoteToDelete(null);
@@ -50,20 +65,19 @@ export function useQuotes() {
     }
   };
 
-  const filteredQuotes = quotes.filter(quote => {
-    if (!quote || !quote.client) return false;
-    const search = searchTerm.toLowerCase();
-    return (quote.quoteNumber || "").toLowerCase().includes(search) || 
-           (quote.client.companyName || "").toLowerCase().includes(search) || 
-           `${quote.client.firstName} ${quote.client.lastName}`.toLowerCase().includes(search);
-  });
-
   return {
     quotes,
-    filteredQuotes,
+    totalElements,
+    totalPages,
+    page,
+    setPage,
+    pageSize,
+    setPageSize,
     isLoading,
     searchTerm,
     setSearchTerm,
+    status,
+    setStatus,
     isDialogOpen,
     setIsDialogOpen,
     selectedQuote,

@@ -12,6 +12,7 @@ interface PageHeaderProps {
   searchTerm?: string;
   onSearchChange?: (value: string) => void;
   searchPlaceholder?: string;
+  children?: React.ReactNode;
 }
 
 export function PageHeader({
@@ -23,6 +24,7 @@ export function PageHeader({
   searchTerm,
   onSearchChange,
   searchPlaceholder = "Rechercher...",
+  children,
 }: PageHeaderProps) {
   return (
     <div className="flex flex-col gap-6">
@@ -46,17 +48,20 @@ export function PageHeader({
         )}
       </div>
 
-      {onSearchChange !== undefined && (
-        <div className="relative max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-          <Input
-            placeholder={searchPlaceholder}
-            className="pl-9 rounded-full bg-muted/50 border-none focus-visible:ring-1 focus-visible:ring-primary/20"
-            value={searchTerm}
-            onChange={(e) => onSearchChange(e.target.value)}
-          />
-        </div>
-      )}
+      <div className="flex flex-wrap items-center gap-4">
+        {onSearchChange !== undefined && (
+          <div className="relative max-w-sm flex-1 md:flex-none">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+            <Input
+              placeholder={searchPlaceholder}
+              className="pl-9 rounded-full bg-muted/50 border-none focus-visible:ring-1 focus-visible:ring-primary/20"
+              value={searchTerm}
+              onChange={(e) => onSearchChange(e.target.value)}
+            />
+          </div>
+        )}
+        {children}
+      </div>
     </div>
   );
 }

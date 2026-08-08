@@ -1,9 +1,15 @@
 import api from "../api.config";
 import { createCrudApi } from "../api.utils";
 import { CreateInvoiceRequest, Invoice } from "../../lib/configs/interface/invoice";
+import { PageParams, PageResponse } from "../../lib/configs/interface/common";
 
 export const invoicesApi = {
   ...createCrudApi<Invoice, CreateInvoiceRequest, CreateInvoiceRequest>("/invoices"),
+
+  getAllPaginated: async (params: PageParams): Promise<PageResponse<Invoice>> => {
+    const response = await api.get<PageResponse<Invoice>>("/invoices", { params });
+    return response.data;
+  },
 
   updateStatus: async (id: number, status: string): Promise<Invoice> => {
     const response = await api.put<Invoice>(`/invoices/${id}/status`, null, { params: { status } });

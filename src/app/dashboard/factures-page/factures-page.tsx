@@ -6,6 +6,14 @@ import { formatDate, formatCurrency } from "@/lib/utils/format";
 import { DeleteConfirmModal } from "@/components/delete-confirm-modal";
 import { PageHeader } from "@/components/layout/page-header";
 import { DataTable } from "@/components/layout/data-table";
+import { Pagination } from "@/components/layout/pagination";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,7 +36,6 @@ import { useInvoices } from "./hooks/use-invoices";
 
 export default function FacturesPage() {
   const {
-    filteredInvoices,
     isLoading,
     searchTerm,
     setSearchTerm,
@@ -47,7 +54,14 @@ export default function FacturesPage() {
     handleViewDetails,
     handleDeleteInvoice,
     fetchInvoices,
-    invoices
+    invoices,
+    totalElements,
+    totalPages,
+    page,
+    setPage,
+    pageSize,
+    status,
+    setStatus
   } = useInvoices();
 
   const columns = [
@@ -108,18 +122,39 @@ export default function FacturesPage() {
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
         searchPlaceholder="Rechercher une facture..."
-      />
+      >
+        <Select value={status || "all"} onValueChange={(v) => setStatus(v === "all" ? undefined : v)}>
+          <SelectTrigger className="w-[180px] rounded-full bg-muted/50 border-none">
+            <SelectValue placeholder="Tous les statuts" />
+          </SelectTrigger>
+          <SelectContent className="rounded-xl">
+            <SelectItem value="all">Tous les statuts</SelectItem>
+            <SelectItem value="EN_ATTENTE">En attente</SelectItem>
+            <SelectItem value="PAYEE">Payée</SelectItem>
+            <SelectItem value="EN_RETARD">En retard</SelectItem>
+            <SelectItem value="ANNULEE">Annulée</SelectItem>
+          </SelectContent>
+        </Select>
+      </PageHeader>
 
       <div className="flex gap-4 ml-auto -mt-2">
-        <Badge variant="secondary" className="rounded-full px-3 py-1">Total: {invoices.length}</Badge>
+        <Badge variant="secondary" className="rounded-full px-3 py-1">Total: {totalElements}</Badge>
       </div>
 
       <DataTable
         columns={columns}
-        data={filteredInvoices}
+        data={invoices}
         isLoading={isLoading}
         onRowClick={handleViewDetails}
         emptyMessage={searchTerm ? "Aucun résultat pour votre recherche." : "Vous n'avez pas encore créé de facture."}
+      />
+
+      <Pagination 
+        page={page}
+        totalPages={totalPages}
+        totalElements={totalElements}
+        pageSize={pageSize}
+        onPageChange={setPage}
       />
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>

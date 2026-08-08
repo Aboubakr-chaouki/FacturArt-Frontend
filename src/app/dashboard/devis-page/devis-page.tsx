@@ -7,6 +7,14 @@ import { StatusBadge } from "@/components/status-badge";
 import { DeleteConfirmModal } from "@/components/delete-confirm-modal";
 import { PageHeader } from "@/components/layout/page-header";
 import { DataTable } from "@/components/layout/data-table";
+import { Pagination } from "@/components/layout/pagination";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,10 +36,8 @@ import { useQuotes } from "./hooks/use-quotes";
 
 export default function DevisPage() {
   const {
-    filteredQuotes,
     isLoading,
     searchTerm,
-    setSearchTerm,
     isDialogOpen,
     setIsDialogOpen,
     selectedQuote,
@@ -47,7 +53,15 @@ export default function DevisPage() {
     handleViewDetails,
     handleDeleteQuote,
     fetchQuotes,
-    quotes
+    quotes,
+    totalElements,
+    totalPages,
+    page,
+    setPage,
+    pageSize,
+    status,
+    setStatus,
+    setSearchTerm
   } = useQuotes();
 
   const columns = [
@@ -118,18 +132,40 @@ export default function DevisPage() {
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
         searchPlaceholder="Rechercher un devis..."
-      />
+      >
+        <Select value={status || "all"} onValueChange={(v) => setStatus(v === "all" ? undefined : v)}>
+          <SelectTrigger className="w-[180px] rounded-full bg-muted/50 border-none">
+            <SelectValue placeholder="Tous les statuts" />
+          </SelectTrigger>
+          <SelectContent className="rounded-xl">
+            <SelectItem value="all">Tous les statuts</SelectItem>
+            <SelectItem value="BROUILLON">Brouillon</SelectItem>
+            <SelectItem value="ENVOYE">Envoyé</SelectItem>
+            <SelectItem value="ACCEPTE">Accepté</SelectItem>
+            <SelectItem value="REFUSE">Refusé</SelectItem>
+            <SelectItem value="CONVERTI">Converti</SelectItem>
+          </SelectContent>
+        </Select>
+      </PageHeader>
 
       <div className="flex gap-4 ml-auto -mt-2">
-        <Badge variant="secondary" className="rounded-full px-3 py-1">Total: {quotes.length}</Badge>
+        <Badge variant="secondary" className="rounded-full px-3 py-1">Total: {totalElements}</Badge>
       </div>
 
       <DataTable
         columns={columns}
-        data={filteredQuotes}
+        data={quotes}
         isLoading={isLoading}
         onRowClick={handleViewDetails}
         emptyMessage={searchTerm ? "Aucun résultat pour votre recherche." : "Commencez par créer votre premier devis."}
+      />
+
+      <Pagination 
+        page={page}
+        totalPages={totalPages}
+        totalElements={totalElements}
+        pageSize={pageSize}
+        onPageChange={setPage}
       />
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
