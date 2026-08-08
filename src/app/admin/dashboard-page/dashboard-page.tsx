@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAdmin, AdminStats } from '@/hooks/admin/use-admin';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, FileText, FileSpreadsheet, TrendingUp, UserPlus, Calendar, MessageSquare, LucideIcon } from 'lucide-react';
+import { Users, FileText, FileSpreadsheet, TrendingUp, UserPlus, MessageSquare, LucideIcon } from 'lucide-react';
 
 interface StatCard {
   title: string;
@@ -61,14 +61,6 @@ const AdminDashboardPage = () => {
       color: "text-purple-600",
       bgColor: "bg-purple-100"
     },
-    {
-        title: "Volume du Mois",
-        value: `${(stats?.invoicesThisMonth || 0).toLocaleString()}€`,
-        description: "Facturation ce mois-ci",
-        icon: Calendar,
-        color: "text-orange-600",
-        bgColor: "bg-orange-100"
-      },
     {
       title: "Total Factures",
       value: stats?.totalInvoices || 0,
