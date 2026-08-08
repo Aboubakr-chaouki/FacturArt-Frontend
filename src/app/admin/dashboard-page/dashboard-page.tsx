@@ -45,6 +45,7 @@ const AdminDashboardPage = () => {
       bgColor: "bg-blue-100",
       link: "/admin/utilisateurs"
     },
+
     {
       title: "Nouveaux Inscrits",
       value: stats?.newUsersThisMonth || 0,
@@ -53,6 +54,7 @@ const AdminDashboardPage = () => {
       color: "text-green-600",
       bgColor: "bg-green-100",
     },
+
     {
       title: "Chiffre d'Affaires Global",
       value: `${(stats?.totalRevenue || 0).toLocaleString()}€`,
@@ -61,6 +63,7 @@ const AdminDashboardPage = () => {
       color: "text-purple-600",
       bgColor: "bg-purple-100"
     },
+
     {
       title: "Total Factures",
       value: stats?.totalInvoices || 0,
@@ -69,6 +72,7 @@ const AdminDashboardPage = () => {
       color: "text-indigo-600",
       bgColor: "bg-indigo-100"
     },
+
     {
       title: "Total Devis",
       value: stats?.totalQuotes || 0,
@@ -77,6 +81,7 @@ const AdminDashboardPage = () => {
       color: "text-pink-600",
       bgColor: "bg-pink-100"
     },
+
     {
       title: "Messages Support",
       value: stats?.totalSupportMessages || 0,
